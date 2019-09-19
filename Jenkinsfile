@@ -19,7 +19,7 @@ stages{
             sh '''
                 cd src/test
                 docker build -t toxictypo .
-                docker run -d --network=testnet --name server toxictypoapp
+                docker run -d --network=testnet --name server toxictypo
                 touch log/log.txt
                 docker run -v $PWD/log:/test/log --name pytest --network=testnet -t toxictest 
                 docker container rm -f server pytest
@@ -38,7 +38,7 @@ stages{
         steps{
             script{
             docker.withRegistry("https://032245641140.dkr.ecr.us-east-2.amazonaws.com", "ecr:us-east-2:awscred") {
-                docker.image("toxictypoapp").push()
+                docker.image("toxictypo").push()
             }}
 
                 withCredentials([file(credentialsId: '688e9c5e-9d3f-4dbf-9251-ab35669c4935', variable: 'FILE')]) {
