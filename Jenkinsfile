@@ -40,7 +40,15 @@ stages{
             docker.withRegistry("https://032245641140.dkr.ecr.us-east-2.amazonaws.com", "ecr:us-east-2:awscred") {
                 docker.image("toxictypo").push()
             }}
-        }
+
+            sshagent (credentials: ['ec2']) {
+                    sh '''
+                    ssh -o StrictHostKeyChecking=no  ubuntu@18.222.202.245 << EOSSH
+                    $(aws ecr get-login --no-include-email)
+                    docker run -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
+                    EOSSH
+                    '''
+            }
     }
 
 
