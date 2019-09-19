@@ -24,8 +24,7 @@ stages{
                 docker run -v $PWD/log:/test/log --name pytest --network=testnet -t toxictest 
                 docker container rm -f server pytest
                 cd log
-                code=$(grep -c "failures" log.txt)
-                if [ "$code" -eq "0" ]; then
+                if [ $(grep -c "failures" log.txt) -eq "0" ]; then
                     exit 0
                 fi
                 exit 1
