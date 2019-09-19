@@ -46,7 +46,7 @@ stages{
       
     
                     sh '''
-                    ssh-add -l $FILE
+                
                     ssh -i $FILE ubuntu@18.222.202.245 << EOSSH
                     docker container rm -f srv
                     $(aws ecr get-login --no-include-email)
