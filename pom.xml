@@ -35,11 +35,14 @@
             <!--<optional>true</optional>-->
         <!--</dependency>-->
 
+
         <dependency>
-            <groupId>com.terrygilliam</groupId>
-            <artifactId>terrygilliam</artifactId>
-            <version>3.5</version>
+            <groupId>com.spotify</groupId>
+            <artifactId>dockerfile-maven-plugin</artifactId>
+            <version>1.4.12</version>
         </dependency>
+
+    
 
         <dependency>
             <groupId>spelling</groupId>
@@ -59,7 +62,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-
+            
             <plugin>
                  <groupId>com.spotify</groupId>
                      <artifactId>dockerfile-maven-plugin</artifactId>
@@ -74,8 +77,8 @@
                     </execution>
                 </executions>
             <configuration>
-                <repository>toxictypoapp</repository>
-                     <tag>latest</tag>
+                <repository>thumbnailer</repository>
+                     <tag>${project.version}</tag>
                         <buildArgs>
                          <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
                         </buildArgs>
