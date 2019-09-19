@@ -21,7 +21,7 @@ stages{
                 mkdir log
                 docker build -t toxictest .
                 docker run -d --network=testnet --name server toxictypoapp
-                touch log.txt
+                touch log/log.txt
                 docker run -v $PWD/log:/test/log --name pytest --network=testnet -t toxictest 
                 docker container rm -f server pytest
                 cd log
