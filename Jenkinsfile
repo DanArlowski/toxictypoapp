@@ -18,7 +18,7 @@ stages{
         steps{
             sh '''
                 cd src/test
-                docker build -t toxictest .
+                docker build -t toxictypo .
                 docker run -d --network=testnet --name server toxictypoapp
                 touch log/log.txt
                 docker run -v $PWD/log:/test/log --name pytest --network=testnet -t toxictest 
@@ -38,7 +38,7 @@ stages{
         steps{
             script{
             docker.withRegistry("https://032245641140.dkr.ecr.us-east-2.amazonaws.com", "ecr:us-east-2:awscred") {
-                docker.image("toxictest").push()
+                docker.image("toxictypo").push()
             }}
         }
     }
