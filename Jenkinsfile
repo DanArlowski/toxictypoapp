@@ -34,9 +34,10 @@ stages{
             branch 'master'
         }
         steps{
+            script{
             docker.withRegistry("https://032245641140.dkr.ecr.us-east-2.amazonaws.com", "ecr:us-east-2:AKIAQPAP5N62NTJEEA6P") {
                 docker.image("toxictest").push()
-            }
+            }}
         }
     }
 
