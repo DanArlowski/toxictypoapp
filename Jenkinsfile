@@ -41,7 +41,7 @@ stages{
                 docker.image("toxictypo").push()
             }}
 
-            sshagent (credentials: ['ec2']) {
+            sshagent (['ec2']) {
                     sh '''
                     ssh ubuntu@18.222.202.245 << EOSSH
                     docker container rm -f srv
