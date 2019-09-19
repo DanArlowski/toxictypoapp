@@ -18,6 +18,7 @@ stages{
         steps{
             sh '''
                 cd src/test
+                mkdir log
                 docker build -t toxictest .
                 docker run -d --network=testnet --name server toxictypoapp
                 touch log.txt
