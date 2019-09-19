@@ -21,7 +21,7 @@ stages{
                 docker build -t toxictest .
                 docker run -d --network=testnet --name server toxictypoapp
                 touch log.txt
-                docker run -v $PWD/log.txt:/test/log.txt --network=testnet -it toxictest 
+                docker run -v $PWD/log.txt:/test/log.txt --network=testnet -t toxictest 
                 docker container rm -f server
                 code=$(grep -i "failures" log.txt)
                 if [ $code -ne 0 ]; then
