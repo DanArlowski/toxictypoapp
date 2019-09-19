@@ -23,6 +23,7 @@ stages{
                 touch log.txt
                 docker run -v $PWD/log:/test/log --name pytest --network=testnet -t toxictest 
                 docker container rm -f server pytest
+                cd log
                 code=$(grep -i "failures" log/log.txt)
                 if [ $code -ne 0 ]; then
                     exit 1
