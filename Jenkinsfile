@@ -43,13 +43,14 @@ stages{
 
             sshagent (['688e9c5e-9d3f-4dbf-9251-ab35669c4935']) {
                     sh '''
+                    ssh-add -l
                     ssh ubuntu@18.222.202.245 << EOSSH
                     docker container rm -f srv
                     $(aws ecr get-login --no-include-email)
                     docker run --name srv -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
                     EOSSH
                     '''
-            }
+               }   
         }
     }
 }
