@@ -43,9 +43,10 @@ stages{
 
             sshagent (credentials: ['ec2']) {
                     sh '''
-                    ssh -o StrictHostKeyChecking=no  ubuntu@18.222.202.245 << EOSSH
+                    ssh ubuntu@18.222.202.245 << EOSSH
+                    docker container rm -f srv
                     $(aws ecr get-login --no-include-email)
-                    docker run -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
+                    docker run --name srv -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
                     EOSSH
                     '''
             }
