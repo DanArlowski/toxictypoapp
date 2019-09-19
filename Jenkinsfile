@@ -20,6 +20,7 @@ stages{
                 cd src/test
                 docker build -t toxictest .
                 docker run -d --network=testnet --name server toxictypoapp
+                touch log.txt
                 docker run --network=testnet -it toxictest > log.txt
                 docker container rm -f server
                 code=$(grep -i "failures" log.txt)
