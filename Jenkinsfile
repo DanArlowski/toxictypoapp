@@ -25,9 +25,10 @@ stages{
                 docker container rm -f server pytest
                 cd log
                 code=$(grep -c "failures" log.txt)
-                if [ $code -ne 0 ]; then
-                    exit 1
+                if [ "$code" -eq "0" ]; then
+                    exit 0
                 fi
+                exit 1
                 '''
         }
     }
