@@ -47,12 +47,11 @@ stages{
       
     
                     sh '''
-                
-                    ssh -i $FILE ubuntu@18.222.202.245 << EOSSH
+                    ssh -i $FILE ubuntu@18.222.202.245 << EOF
                     docker container rm -f srv
                     $(aws ecr get-login --no-include-email)
                     docker run -d --name srv -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
-                    EOSSH
+                    EOF
                     '''
                }   
         }
