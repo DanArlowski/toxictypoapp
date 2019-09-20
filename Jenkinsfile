@@ -40,7 +40,7 @@ stages{
         steps{
             script{
             docker.withRegistry("https://032245641140.dkr.ecr.us-east-2.amazonaws.com", "ecr:us-east-2:awscred") {
-                docker.image("toxictypo").push()
+                docker.image("toxictypo:latest").push()
             }}
 
                 withCredentials([file(credentialsId: '688e9c5e-9d3f-4dbf-9251-ab35669c4935', variable: 'FILE')]) {
