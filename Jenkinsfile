@@ -51,7 +51,6 @@ stages{
                     docker container rm -f srv
                     $(aws ecr get-login --no-include-email)
                     docker run -d --name srv -p 80:8080 032245641140.dkr.ecr.us-east-2.amazonaws.com/toxictypo:latest
-                    EOF
                     '''
                }   
         }
