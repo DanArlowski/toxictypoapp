@@ -77,7 +77,7 @@
                     </execution>
                 </executions>
             <configuration>
-                <repository>toxictypoapp</repository>
+                <repository>toxictypo</repository>
                      <tag>latest</tag>
                         <buildArgs>
                          <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>

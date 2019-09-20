@@ -1,0 +1,4 @@
+Server is set to server:8080
+Test level is set to sanity
+Wait time is set to 10
+Waiting 10 seconds before starting to send test messages...
