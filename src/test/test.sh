@@ -1,2 +1,3 @@
 echo "starting e2e test"
-python2 e2e_test.py server:8080 sanity 10 > log/log.txt
+echo "****testing file: $1****" >> log/log.txt
+python2 e2e_test.py server:8080 $1 10 >> log/log.txt
