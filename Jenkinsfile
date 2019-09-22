@@ -24,6 +24,7 @@ stages{
                 docker build -t toxictest .
                 docker run -d --network=testnet --name server toxictypo
                     ''' 
+            steps{
             parallel{
                 a:{
                     sh '''
@@ -56,6 +57,7 @@ stages{
                 fi
                 exit 1
                 '''
+            }
                  post {
                         always {
                             sh "docker container rm -f server pytest1 pytest2 pytest3 pytest4"
