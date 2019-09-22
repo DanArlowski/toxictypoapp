@@ -62,7 +62,7 @@ stages{
                         }
             }
         }
-    }
+    }}
     stage('deploy'){
         when{
             branch 'master'
