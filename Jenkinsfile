@@ -50,15 +50,16 @@ stages{
                     '''
                 }
                 sh '''
-                               cd log
+                cd log
                 if [ $(grep -c "failures" log.txt) -eq "0" ] && [curl server:8080]; then
-                    docker container rm -f server pytest
                     exit 0
                 fi
-                docker container rm -f server pytest
                 exit 1
                 '''
- 
+                 post {
+                        always {
+                            sh "docker container rm -f server pytest1 pytest2 pytest3 pytest4"
+                        }
             }
         }
     }
