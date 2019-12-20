@@ -30,7 +30,7 @@ pipeline{
                     docker run -d --network=testnet --name server toxictypo
 
                     echo "testing e2e1"
-                    docker run --env TESTFILE=e2e --name pytest --network=testnet -t toxictest 
+                    docker run --name pytest --network=testnet -t toxictest 
 
                     cd log
                     if [ $(grep -c "failures" log.txt) -eq "0" ] && [curl server:8080]; then
