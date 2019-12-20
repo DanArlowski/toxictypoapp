@@ -31,12 +31,6 @@ pipeline{
 
                     echo "testing e2e1"
                     docker run --name pytest --network=testnet -t toxictest 
-
-                    cd log
-                    if [ $(grep -c "failures" log.txt) -eq "0" ] && [curl server:8080]; then
-                        exit 0
-                    fi
-                    exit 1
                     '''
             }//steps
         }//test
