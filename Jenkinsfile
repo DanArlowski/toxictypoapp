@@ -4,6 +4,11 @@ pipeline{
         jdk "JAVA"
         maven "maven"
     }
+    post{
+        always{
+            sh 'docker rm -f  server pytest '
+        }
+    }
     stages{
         stage('build'){
             steps{
@@ -25,7 +30,7 @@ pipeline{
                     docker run -d --network=testnet --name server toxictypo
 
                     echo "testing e2e1"
-                    docker run -v $PWD/log:/test/log --env TESTFILE=e2e --name pytest1 --network=testnet -t toxictest 
+                    docker run -v $PWD/log:/test/log --env TESTFILE=e2e --name pytest --network=testnet -t toxictest 
 
                     cd log
                     if [ $(grep -c "failures" log.txt) -eq "0" ] && [curl server:8080]; then
