@@ -22,8 +22,8 @@ pipeline{
         stage('test'){
             steps{ 
                     sh '''  
-                    cd             
-                    docker build -t toxictest src/test/.
+                    cd src/test/            
+                    docker build -t toxictest .
                     docker run -d --network=testnet --name server toxictypo
 
                     echo "testing e2e"
