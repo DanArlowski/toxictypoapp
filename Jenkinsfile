@@ -9,7 +9,7 @@ pipeline{
             steps{
                 withMaven(
                 maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                    sh 'mvn verify'
+                    sh 'mvn -u verify'
                 }//maven
             }//steps
         
