@@ -21,15 +21,11 @@ pipeline{
         }//build
         stage('test'){
             steps{ 
-                    sh '''
-                    cd src/test
-                    rm -f log/log.txt
-                    touch log/log.txt
-                    
+                    sh '''              
                     docker build -t toxictest .
                     docker run -d --network=testnet --name server toxictypo
 
-                    echo "testing e2e1"
+                    echo "testing e2e"
                     docker run --name pytest --network=testnet -t toxictest 
                     '''
             }//steps
@@ -40,9 +36,11 @@ pipeline{
             }//when
             steps{
                 script{
-                    echo 'deploy'
-                }
-                   
+                    docker.withRegistry('https://gcr.io', 'gcr:toxictypoapp') {
+                        sh 'docker tag toxictypo gcr.io/toxictypoapp/toxictypo'
+                        docker.image("gcr.io/toxictypoapp/toxictypo").push()
+                    }
+                }//script   
             }//steps
         }//deploy
     }//steps
