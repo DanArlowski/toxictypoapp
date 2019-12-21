@@ -1,3 +1,4 @@
+def version
 pipeline{
     agent any
     tools{
@@ -6,19 +7,28 @@ pipeline{
     }
     post{
         always{
-            sh 'docker rm -f  server pytest '
+            sh ' docker rm -f  server pytest '
         }
     }
     stages{
+        stage("init parameters"){
+            steps{
+                script{
+                    version=GIT_COMMIT.substring(0,6)
+                }//script
+            }//steps
+        }//init parameters
+
         stage('build'){
             steps{
                 withMaven(
                 maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                    sh 'mvn  verify'
+                    sh "mvn versions:set -DnewVersion=${version}"
+                    sh 'mvn  verify '
                 }//maven
             }//steps
-        
         }//build
+
         stage('test'){
             steps{ 
                     sh '''  
@@ -31,6 +41,7 @@ pipeline{
                     '''
             }//steps
         }//test
+
         stage('deploy'){
             when{
                 branch 'master'
@@ -39,11 +50,12 @@ pipeline{
                 script{
                     docker.withRegistry('https://gcr.io', 'gcr:toxictypoapp') {
                         sh 'docker tag toxictypo gcr.io/toxictypoapp/toxictypo'
-                        docker.image("gcr.io/toxictypoapp/toxictypo").push()
+                        docker.image("gcr.io/toxictypoapp/toxictypo:"+version).push()
                     }
                 }//script   
             }//steps
         }//deploy
-    }//steps
+        
+    }//stages
 
-}
+}//pipeline
