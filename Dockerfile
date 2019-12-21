@@ -5,4 +5,4 @@ ARG JAR_FILE
 COPY ./target .
 #RUN mvn verify
 EXPOSE 8080
-ENTRYPOINT java, -jar , toxictypoapp-${TAG}.jar
+ENTRYPOINT java -jar toxictypoapp-${TAG}.jar
