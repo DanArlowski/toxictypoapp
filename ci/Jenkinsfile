@@ -22,7 +22,7 @@ pipeline{
 
         stage('build'){
             steps{
-                dir{
+                dir(".."){
                     withMaven(
                         maven: 'maven', mavenSettingsConfig: 'mavensetting') {
                             sh "mvn versions:set -DnewVersion=${version}"
@@ -34,7 +34,7 @@ pipeline{
 
         stage('test'){
             steps{ 
-                  dir {
+                  dir("..") {
                       sh '''  
                     cd src/test/            
                     docker build -t toxictest .
