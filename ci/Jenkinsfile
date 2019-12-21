@@ -52,7 +52,7 @@ pipeline{
                         echo 'pushing Artifact to artifactory...'
                         withMaven(
                             maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                                sh 'mvn deploy -Dmaven.install.skip=true'
+                                sh 'mvn deploy:deploy'
                         }//maven
 
                         echo 'pushing to container registry...'
