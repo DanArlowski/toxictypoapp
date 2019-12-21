@@ -49,13 +49,13 @@ pipeline{
             steps{
                 script{
                     docker.withRegistry('https://gcr.io', 'gcr:toxictypoapp') {
-                        sh 'docker tag toxictypo gcr.io/toxictypoapp/toxictypo'
+                        sh "docker tag toxictypo gcr.io/toxictypoapp/toxictypo:${version}"
                         docker.image("gcr.io/toxictypoapp/toxictypo:"+version).push()
                     }
                 }//script   
             }//steps
         }//deploy
-        
+
     }//stages
 
 }//pipeline
