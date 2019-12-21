@@ -3,6 +3,7 @@ FROM openjdk:8u222-jre
 ENV TAG="null"
 ARG JAR_FILE
 COPY ./target .
+RUN mv toxictypoapp-${TAG}.jar toxictypoappRUNNABLE.jar
 #RUN mvn verify
 EXPOSE 8080
-ENTRYPOINT java -jar toxictypoapp-${TAG}.jar
+ENTRYPOINT java -jar toxictypoappRUNNABLE.jar
