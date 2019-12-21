@@ -48,9 +48,16 @@ pipeline{
             }//when
             steps{
                 script{
-                    docker.withRegistry('https://gcr.io', 'gcr:toxictypoapp') {
-                        sh "docker tag toxictypo gcr.io/toxictypoapp/toxictypo:${version}"
-                        docker.image("gcr.io/toxictypoapp/toxictypo:"+version).push()
+                        sh 'pushing Artifact to artifactory...'
+                        withMaven(
+                            maven: 'maven', mavenSettingsConfig: 'mavensetting') {
+                                sh 'mvn  deploy'
+                        }//maven
+
+                        echo 'pushing to container registry...'
+                        docker.withRegistry('https://gcr.io', 'gcr:toxictypoapp') {
+                            sh "docker tag toxictypo gcr.io/toxictypoapp/toxictypo:${version}"
+                            docker.image("gcr.io/toxictypoapp/toxictypo:"+version).push()
                     }
                 }//script   
             }//steps
