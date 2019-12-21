@@ -8,7 +8,7 @@ pipeline{
     post{
         always{
             sh ' docker rm -f  server pytest '
-            sh 'rm -rf'
+            sh 'rm -rf *'
         }
     }
     stages{
