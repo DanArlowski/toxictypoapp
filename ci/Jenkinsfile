@@ -52,7 +52,7 @@ pipeline{
                         echo 'pushing Artifact to artifactory...'
                         withMaven(
                             maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                                sh 'mvn deploy'
+                                sh 'mvn deploy -DskipDockerBuild'
                         }//maven
 
                         echo 'pushing to container registry...'
