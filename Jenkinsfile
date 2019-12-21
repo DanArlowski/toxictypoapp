@@ -21,11 +21,13 @@ pipeline{
 
         stage('build'){
             steps{
-                withMaven(
-                maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                    sh "mvn versions:set -DnewVersion=${version}"
-                    sh 'mvn  verify '
-                }//maven
+                dir{
+                    withMaven(
+                        maven: 'maven', mavenSettingsConfig: 'mavensetting') {
+                            sh "mvn versions:set -DnewVersion=${version}"
+                            sh 'mvn  verify '
+                    }//maven
+                }
             }//steps
         }//build
 
