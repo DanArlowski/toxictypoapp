@@ -31,7 +31,8 @@ pipeline{
 
         stage('test'){
             steps{ 
-                    sh '''  
+                  dir {
+                      sh '''  
                     cd src/test/            
                     docker build -t toxictest .
                     docker run -d --network=testnet --name server toxictypo
@@ -39,6 +40,7 @@ pipeline{
                     echo "testing e2e"
                     docker run --name pytest --network=testnet -t toxictest 
                     '''
+                    }
             }//steps
         }//test
 
@@ -51,7 +53,7 @@ pipeline{
                         echo 'pushing Artifact to artifactory...'
                         withMaven(
                             maven: 'maven', mavenSettingsConfig: 'mavensetting') {
-                                sh 'mvn  deploy'
+                                sh 'mvn deploy -Dmaven.install.skip=true'
                         }//maven
 
                         echo 'pushing to container registry...'
