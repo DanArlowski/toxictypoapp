@@ -48,7 +48,7 @@ pipeline{
             }//when
             steps{
                 script{
-                        sh 'pushing Artifact to artifactory...'
+                        echo 'pushing Artifact to artifactory...'
                         withMaven(
                             maven: 'maven', mavenSettingsConfig: 'mavensetting') {
                                 sh 'mvn  deploy'
