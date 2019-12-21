@@ -1,6 +1,6 @@
 FROM openjdk:8u222-jre
 #COPY ./settings.xml /root/.m2/settings.xml
-ARG TAG
+ENV TAG
 COPY ./target .
 #RUN mvn verify
 EXPOSE 8080
