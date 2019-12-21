@@ -32,14 +32,14 @@ pipeline{
 
         stage('test'){
             steps{ 
-                      sh '''  
+                    sh """  
                     cd src/test/            
                     docker build -t toxictest .
-                    docker run -d --network=testnet --name server toxictypo
+                    docker run -d --env TAG=${version} --network=testnet --name server toxictypo
 
                     echo "testing e2e"
                     docker run --name pytest --network=testnet -t toxictest 
-                    '''
+                    """
             }//steps
         }//test
 
