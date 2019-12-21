@@ -88,5 +88,11 @@
 
         </plugins>
     </build>
-
+<distributionManagement>
+    <repository>
+        <id>central</id>
+        <name>9c8b2892eea3-releases</name>
+        <url>http://artifactory:8081/artifactory/libs-release</url>
+    </repository>
+</distributionManagement>
 </project>
