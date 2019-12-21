@@ -22,19 +22,16 @@ pipeline{
 
         stage('build'){
             steps{
-                dir(".."){
                     withMaven(
                         maven: 'maven', mavenSettingsConfig: 'mavensetting') {
                             sh "mvn versions:set -DnewVersion=${version}"
                             sh 'mvn  verify '
                     }//maven
-                }
             }//steps
         }//build
 
         stage('test'){
             steps{ 
-                  dir("..") {
                       sh '''  
                     cd src/test/            
                     docker build -t toxictest .
@@ -43,7 +40,6 @@ pipeline{
                     echo "testing e2e"
                     docker run --name pytest --network=testnet -t toxictest 
                     '''
-                    }
             }//steps
         }//test
 
